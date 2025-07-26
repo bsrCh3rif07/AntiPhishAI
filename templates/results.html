@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detection with AI Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Phishing Detection AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#results">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5" id="results">
+        <h1 class="text-center">Phishing Detection Results</h1>
+        <p class="text-center">Domain analyzed: <strong>{{ domain }}</strong></p>
+        <div class="row">
+            {% for model, result in results.items() %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <center><h5 class="card-title">{{ model }}</h5></center>
+                        <p class="card-text">
+                            <strong>Prediction:</strong> 
+                            <span class="{% if result.prediction == 'Phishing' %}text-danger{% else %}text-success{% endif %}">
+                                {{ result.prediction }}
+                            </span><br>
+                            <strong>Score :</strong> {{ result.score }}
+                        </p>
+                        <p><strong>Description :</strong></p>
+                        <p><small>{{ explanations[model] }}</small></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Final results summary -->
+        <div class="alert alert-info text-center mt-4">
+            <h5>Final Results Summary</h5>
+            <p>
+                <strong>Alerts:</strong> {{ alert_count }} out of {{ results|length }} models.<br>
+                <strong>Alert Ratio:</strong> {{ (alert_count / results|length) | round(2) }} (out of 1.0).
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Phishing Detection AI. All Rights Reserved.</p>
+            <p>
+                <a href="/privacy" class="text-white">Privacy Policy</a> | 
+                <a href="/terms" class="text-white">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

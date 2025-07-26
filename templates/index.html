@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detection with AI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Ensure footer stays at the bottom of the page */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .content-wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Wrapper to ensure footer sticks to the bottom -->
+    <div class="content-wrapper">
+        <!-- Header -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Phishing Detection AI</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content container py-5">
+            <h1 class="text-center">Phishing Detection</h1>
+            <form action="/results" method="POST" class="mt-5">
+                <div class="mb-3">
+                    <label for="domain" class="form-label">Enter Domain or URL</label>
+                    <input type="text" class="form-control" id="domain" name="domain" placeholder="e.g., example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email-content" class="form-label">Email Content (Optional)</label>
+                    <textarea class="form-control" id="email-content" name="email_content" rows="3"
+                        placeholder="Paste email content here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Analyze</button>
+            </form>        
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Phishing Detection AI. All Rights Reserved.</p>
+            <p>
+                <a href="/privacy" class="text-white">Privacy Policy</a> | 
+                <a href="/terms" class="text-white">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
