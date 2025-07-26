@@ -1,72 +1,75 @@
-Sure! Here's the full `README.md` code as plain text — you can copy-paste it directly into your project directory:
+# AntiPhishAI
 
-```markdown
-# Phishing Detection Web Application using Machine Learning and Deep Learning
-
-## 🧠 Objective
-
-This project aims to detect phishing URLs using various Machine Learning (ML) and Deep Learning (DL) algorithms. It provides a web interface where users can submit a domain or email content. The app extracts features from the input and predicts whether it's legitimate or phishing using multiple trained models.
+**A web-based phishing detection system powered by multiple Machine Learning and Deep Learning models.**
 
 ---
 
-## 🚀 Features
+## 🧠 Overview
 
-- 🌐 Web-based interface built with Flask  
-- 🔍 Feature extraction from domain and email content  
-- 🤖 Multi-model predictions using:
+AntiPhishAI analyzes URLs and optional email content to detect phishing attempts. The application runs several trained models concurrently and presents prediction outcomes with confidence scores via an intuitive Flask interface.
+
+---
+
+## ⚙️ Key Features
+
+- Submit URLs (and optional email content) via a clean web form
+- Extract and compute phishing-relevant features
+- Run predictions using:
   - Gradient Boosting
-  - K-Nearest Neighbors (KNN)
+  - K‑Nearest Neighbors (KNN)
   - Logistic Regression
   - Random Forest
   - Support Vector Machine (SVM)
   - LSTM (Deep Learning)
-- 📊 Displays prediction results and model confidence scores  
-- 🔐 Includes privacy and terms policy routes  
+- Display labels (**Phishing** or **Legitimate**) and model confidence scores
+- Show per-model explanations for interpretability
+- Includes Privacy Policy and Terms of Service pages
 
 ---
 
 ## 🧰 Tech Stack
 
-- **Backend:** Python (Flask)  
-- **Machine Learning:** Scikit-learn, TensorFlow Keras  
-- **Data Manipulation:** Pandas, NumPy  
-- **Frontend:** HTML (Jinja2 templates)  
-- **Deployment-ready:** Localhost or any WSGI-compatible environment  
+- **Backend**: Flask (Python)  
+- **ML/DL Tools**: scikit-learn, TensorFlow / Keras  
+- **Data Handling**: pandas, NumPy  
+- **Frontend**: Jinja2-based HTML templates  
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Repository Structure
 
 ```
 
-.
-├── app.py                         # Main Flask application
+AntiPhishAI/
+├── app.py                        # Flask application entry
 ├── static/
 │   └── script/
 │       ├── get\_info.py           # Feature extraction logic
-│       ├── phishing\_model\_*.pkl  # ML models
+│       ├── phishing\_model\_*.pkl  # Trained ML models
 │       ├── phishing\_model\_dl\_lstm.h5  # LSTM model
-│       └── scaler\_*.pkl          # Feature scalers
+│       └── scaler\_*.pkl          # Scalers for ML models
 ├── templates/
-│   ├── index.html                # Input form page
-│   ├── results.html              # Result display
-│   ├── privacy.html              # Privacy policy
-│   └── terms.html                # Terms of service
+│   ├── index.html               # Input form page
+│   ├── results.html             # Prediction results page
+│   ├── privacy.html             # Privacy policy page
+│   └── terms.html               # Terms of Service page
+├── LICENSE                      # MIT License
+├── README.md                    # This file
+└── requirements.txt             # Dependencies list
 
 ````
 
 ---
 
-## 📦 Setup Instructions
+## 🚀 Installation & Usage
 
 ### 1. Clone the Repository
-
 ```bash
-git clone https://github.com/your-username/phishing-detector-flask.git
-cd phishing-detector-flask
+git clone https://github.com/bsrCh3rif07/AntiPhishAI.git
+cd AntiPhishAI
 ````
 
-### 2. Create a Virtual Environment
+### 2. Set Up a Virtual Environment
 
 ```bash
 python -m venv venv
@@ -79,42 +82,53 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Make sure to include:
-
-* Flask
-* numpy
-* pandas
-* scikit-learn
-* tensorflow
-* any other dependencies your `get_info.py` uses
-
-### 4. Start the Flask App
+### 4. Run the Application
 
 ```bash
 python app.py
 ```
 
-Then visit `http://127.0.0.1:5000` in your browser.
+Visit `http://127.0.0.1:5000` in your browser to start.
 
 ---
 
-## 🧪 Model Training (Optional)
+## 📜 How It Works
 
-This repo only includes inference logic. If you want to train the models yourself, prepare a dataset of phishing and legitimate URLs, extract features (like those in `get_features_info()`), and train each algorithm separately, saving:
+### 1. Feature Extraction
 
-* Models to `.pkl` or `.h5`
-* Corresponding `StandardScaler` objects
+`get_features_info(domain, email_content)` computes features like URL length, digit ratios, domain age, number of hyperlinks, etc.
+
+### 2. Preprocessing & Modeling
+
+* ML models use a pre-fitted scaler on features, then predict.
+* LSTM uses reshaped input `(batch_size, 1, features)` after optional scaling.
+
+### 3. Prediction Logic
+
+A prediction score ≥ 0.01 is labeled **Phishing**, else **Legitimate**.
+
+### 4. Results Display
+
+Each model’s prediction and score are shown, along with a short explanation of how it works.
 
 ---
 
-## 📌 Notes
+## 🔧 Future Enhancements
 
-* The LSTM model expects input reshaped to `(batch_size, time_steps=1, features)`.
-* For consistency, the same feature set and order must be used for training and inference.
-* The app uses a soft threshold of `0.01` to classify results. Adjust as needed based on your model calibration.
+* Batch processing via CSV upload interface
+* Real-time domain lookup & feature updates
+* Dashboard to compare model performance and visualize results
+* Integration with email providers for automated scanning
 
 ---
 
-## 📜 License
+## 🕶️ Attribution & License
 
-This project is licensed under the MIT License.
+Licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🧾 TL;DR
+
+AntiPhishAI is a Flask-based phishing classifier that leverages multiple ML and DL models to analyze and flag suspicious URLs and email content—ideal for both learning and demonstration purposes.
+
